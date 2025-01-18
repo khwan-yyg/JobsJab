@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { assets, JobCategories, JobLocations } from "../assets/assets";
 import JobCard from "./JobCard";
+import Loading from "./Loading";
 
 const JobListing = () => {
   const { isSearched, searchFilter, setSearchFilter, jobs } =
@@ -158,57 +159,63 @@ const JobListing = () => {
         </h3>
         <p className="mb-8">Get your desired job from top companies</p>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
-          {filteredJobs
-            .slice((currentPage - 1) * 6, currentPage * 6)
-            .map((job, index) => (
-              <JobCard key={index} job={job} />
-            ))}
-        </div>
+        {(jobs && jobs.length > 0) ||
+        (filteredJobs && filteredJobs.length > 0) ? (
+          <>
+            {/* Job Card */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
+              {filteredJobs
+                .slice((currentPage - 1) * 6, currentPage * 6)
+                .map((job, index) => (
+                  <JobCard key={index} job={job} />
+                ))}
+            </div>
 
-        {/* Pagination */}
-        {filteredJobs.length > 0 && (
-          <div className="flex items-center justify-center space-x-2 mt-10">
-            <a href="#job-list">
-              <img
-                onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))}
-                src={assets.left_arrow_icon}
-                alt=""
-              />
-            </a>
+            {/* Pagination */}
+            <div className="flex items-center justify-center space-x-2 mt-10">
+              <a href="#job-list">
+                <img
+                  onClick={() => setCurrentPage(Math.max(currentPage - 1, 1))}
+                  src={assets.left_arrow_icon}
+                  alt=""
+                />
+              </a>
 
-            {Array.from({ length: Math.ceil(filteredJobs.length / 6) }).map(
-              (_, index) => (
-                <a href="#job-list" key={index}>
-                  <button
-                    onClick={() => setCurrentPage(index + 1)}
-                    className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded ${
-                      currentPage === index + 1
-                        ? "bg-blue-100 text-blue-500"
-                        : "text-gray-500"
-                    }`}
-                  >
-                    {index + 1}
-                  </button>
-                </a>
-              )
-            )}
+              {Array.from({ length: Math.ceil(filteredJobs.length / 6) }).map(
+                (_, index) => (
+                  <a href="#job-list" key={index}>
+                    <button
+                      onClick={() => setCurrentPage(index + 1)}
+                      className={`w-10 h-10 flex items-center justify-center border border-gray-300 rounded ${
+                        currentPage === index + 1
+                          ? "bg-blue-100 text-blue-500"
+                          : "text-gray-500"
+                      }`}
+                    >
+                      {index + 1}
+                    </button>
+                  </a>
+                )
+              )}
 
-            <a href="#job-list">
-              <img
-                onClick={() =>
-                  setCurrentPage(
-                    Math.min(
-                      currentPage + 1,
-                      Math.ceil(filteredJobs.length / 6)
+              <a href="#job-list">
+                <img
+                  onClick={() =>
+                    setCurrentPage(
+                      Math.min(
+                        currentPage + 1,
+                        Math.ceil(filteredJobs.length / 6)
+                      )
                     )
-                  )
-                }
-                src={assets.right_arrow_icon}
-                alt=""
-              />
-            </a>
-          </div>
+                  }
+                  src={assets.right_arrow_icon}
+                  alt=""
+                />
+              </a>
+            </div>
+          </>
+        ) : (
+          <Loading height={300} />
         )}
       </section>
     </div>

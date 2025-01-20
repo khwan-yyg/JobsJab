@@ -159,8 +159,7 @@ const JobListing = () => {
         </h3>
         <p className="mb-8">Get your desired job from top companies</p>
 
-        {(jobs && jobs.length > 0) ||
-        (filteredJobs && filteredJobs.length > 0) ? (
+        {filteredJobs && filteredJobs.length > 0 ? (
           <>
             {/* Job Card */}
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -215,7 +214,16 @@ const JobListing = () => {
             </div>
           </>
         ) : (
-          <Loading height={300} />
+          <>
+            <h4 className="font-medium text-lg py-4 ">
+              Search results found 0 jobs. <br />
+              <span className="rich-text">
+                Sorry, the job you are looking for is not found Check your
+                spelling or adjust your filters and try again.
+              </span>
+            </h4>
+            {jobs === null && <Loading height={300} />}
+          </>
         )}
       </section>
     </div>

@@ -40,6 +40,7 @@ const RecruiterLogin = () => {
           localStorage.setItem("companyToken", data.token);
           setShowRecruiterLogin(false);
           navigate("/dashboard");
+          toast.success("Login successfully");
         } else {
           toast.error(data.message);
         }
@@ -61,6 +62,7 @@ const RecruiterLogin = () => {
           localStorage.setItem("companyToken", data.token);
           setShowRecruiterLogin(false);
           navigate("/dashboard");
+          toast.success("Login successfully");
         } else {
           toast.error(data.message);
         }

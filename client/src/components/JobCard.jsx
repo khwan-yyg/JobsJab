@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { assets } from "../assets/assets";
 import { useNavigate } from "react-router-dom";
+import { AppContext } from "../context/AppContext";
 
 const JobCard = ({ job }) => {
   const navigate = useNavigate();
+  const { sanitizeHTML } = useContext(AppContext);
 
   return (
     <div className="border p-6 shadow rounded">
       <div className="flex justify-between items-center">
-        <img className="h-8" src={assets.company_icon} alt="" />
+        <img className="h-8" src={job.companyId.image} alt="" />
       </div>
 
       <h4 className="font-medium text-xl mt-2">{job.title}</h4>
@@ -23,7 +25,9 @@ const JobCard = ({ job }) => {
 
       <p
         className="text-gray-500 text-sm mt-4"
-        dangerouslySetInnerHTML={{ __html: job.description.slice(0, 150) }}
+        dangerouslySetInnerHTML={{
+          __html: sanitizeHTML(job.description.slice(0, 150)),
+        }}
       ></p>
 
       <div className="mt-4 flex gap-4 text-sm">

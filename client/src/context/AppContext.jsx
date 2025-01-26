@@ -80,6 +80,25 @@ export const AppContextProvider = (props) => {
     }
   };
 
+  // Function to fetch user's applied applications data
+  const fetchUserApplications = async () => {
+    try {
+      const token = await getToken();
+
+      const { data } = await axios.get(backendUrl + "/api/users/applications", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+
+      if (data.success) {
+        setUserApplications(data.applications);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+  };
+
   const sanitizeHTML = (html) => {
     // Remove <span> tags and their attributes
     let sanitizedHtml = html
@@ -108,6 +127,7 @@ export const AppContextProvider = (props) => {
   useEffect(() => {
     if (user) {
       fetchUserData();
+      fetchUserApplications();
     }
   }, [user]);
 
@@ -126,6 +146,12 @@ export const AppContextProvider = (props) => {
     setCompanyData,
     backendUrl,
     sanitizeHTML,
+    userData,
+    setUserData,
+    userApplications,
+    setUserApplications,
+    fetchUserData,
+    fetchUserApplications,
   };
 
   return (

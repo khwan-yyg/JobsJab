@@ -57,19 +57,19 @@ export const getUserJobApplications = async (req, res) => {
   try {
     const userId = req.auth.userId;
 
-    const application = await JobApplication.find({ userId })
+    const applications = await JobApplication.find({ userId })
       .populate("companyId", "name email image")
       .populate("jobId", "title description location category level salary")
       .exec();
 
-    if (!application) {
+    if (!applications) {
       res.json({
         success: false,
         message: "No job applications found for this user.",
       });
     }
 
-    return res.json({ success: true, application });
+    return res.json({ success: true, applications });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
@@ -80,7 +80,7 @@ export const updateUserResume = async (req, res) => {
   try {
     const userId = req.auth.userId;
 
-    const resumeFile = req.resumeFile;
+    const resumeFile = req.file;
 
     const userData = await User.findById(userId);
 

@@ -38,7 +38,13 @@ const Navbar = () => {
               Recruiter Login
             </button>
             <button
-              onClick={(e) => openSignIn()}
+              onClick={(e) =>
+                openSignIn({
+                  initialValues: {
+                    emailAddress: "userdemo1234+clerk_test@example.com",
+                  },
+                })
+              }
               className="bg-blue-600 text-white px-6 sm:px-9 py-2 rounded-full"
             >
               Login

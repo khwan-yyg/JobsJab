@@ -11,8 +11,8 @@ const RecruiterLogin = () => {
   const [state, setState] = useState("Login");
 
   const [name, setName] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("12345678");
+  const [email, setEmail] = useState("google@demo.com");
   const [image, setImage] = useState(false);
 
   const [isTextDataSubmited, setIsTextDataSubmited] = useState(false);

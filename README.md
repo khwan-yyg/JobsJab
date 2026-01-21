@@ -1,7 +1,9 @@
-JobsJab – E-commerce Website
+
+## JobsJab – E-commerce Website
 เป็นโปรเจกต์ Full-stack E-commerce Website ที่พัฒนาเพื่อฝึกทักษะการสร้างระบบครบวงจร 
 ตั้งแต่ Frontend (React) ไปจนถึง Backend (Express + MongoDB) รองรับการจัดการสินค้า, ระบบผู้ใช้, การอัปโหลดรูปภาพ, 
 และการชำระเงิน และการยืนยันตัวตน
+
 
 Frontend
 - React 18 – UI Framework
@@ -23,3 +25,19 @@ Backend
 - Dotenv – Environment variables
 - Nodemon – Development server auto-reload
 - Svix – Webhooks integration
+
+## Project Setup
+
+```sh
+npm install
+```
+
+## Compile and Hot-Reload for Development
+
+use one command with concurrently to run all port below
+- Frontend with port 4200
+- Backend with port 5000
+  
+```sh
+npm run dev
+```
